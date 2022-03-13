@@ -1,0 +1,8 @@
+type Query {
+  getZipcodeInfo(countycode: String!, zipcode: Int!): ZipInfo
+}
+
+type ZipInfo {
+  city: String!
+  state: String!
+}
