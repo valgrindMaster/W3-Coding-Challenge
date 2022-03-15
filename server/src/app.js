@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const getZipcodeInfo = require("./routes");
+const zipcodeinfo = require("./routes");
 
 const PORT = 4000;
 
@@ -14,10 +15,11 @@ const schema = buildSchema(
 
 // The root provides a resolver function for each API endpoint
 const root = {
-  getZipcodeInfo,
+  zipcodeinfo,
 };
 
 const app = express();
+app.use(cors());
 app.use(
   "/graphql",
   graphqlHTTP({

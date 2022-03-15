@@ -1,8 +1,8 @@
 const axios = require("axios");
 
-const getZipcodeInfo = async ({ countycode, zipcode }) => {
+const zipcodeinfo = async ({ countrycode, zipcode }) => {
   const res = await axios.get(
-    `http://www.zippopotam.us/${countycode}/${zipcode}`
+    `http://www.zippopotam.us/${countrycode}/${zipcode}`
   );
 
   if (res.status !== 200) {
@@ -19,4 +19,4 @@ const getZipcodeInfo = async ({ countycode, zipcode }) => {
   return { city, state };
 };
 
-module.exports = getZipcodeInfo;
+module.exports = zipcodeinfo;

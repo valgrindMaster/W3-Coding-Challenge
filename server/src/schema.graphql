@@ -1,5 +1,5 @@
 type Query {
-  getZipcodeInfo(countycode: String!, zipcode: Int!): ZipInfo
+  zipcodeinfo(countrycode: String!, zipcode: Int!): ZipInfo
 }
 
 type ZipInfo {
