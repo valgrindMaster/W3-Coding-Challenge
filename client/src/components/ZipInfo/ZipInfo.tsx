@@ -1,7 +1,8 @@
-import { FormEventHandler, useEffect, useRef, useState } from "react";
+import { FormEventHandler, Fragment, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery, gql } from "@apollo/client";
 import countrycodes from "./Countrycodes";
+import "./ZipInfo.scss";
 
 const localStorageKey = "zip-code-info";
 
@@ -93,19 +94,30 @@ export const ZipInfo = () => {
   };
 
   return (
-    <div>
+    <div className="zip-info-wrapper">
       <h1>Zip Code Info</h1>
       <form onSubmit={handleSubmit}>
-        <section>
-          <label htmlFor="countrycodes">Select a country</label>
-          <select defaultValue="US" name="countrycodes" id="countrycodes">
+        <section className="form-section">
+          <label className="form-label" htmlFor="countrycodes">
+            Select a country
+          </label>
+          <select
+            className="select"
+            defaultValue="US"
+            name="countrycodes"
+            id="countrycodes"
+          >
             {countrycodes.map((cc) => (
               <option key={cc.code} value={cc.code}>
                 {cc.name}
               </option>
             ))}
           </select>
-          <label htmlFor="zipcode">Provide a zipcode</label>
+        </section>
+        <section>
+          <label className="form-label" htmlFor="zipcode">
+            Provide a zipcode
+          </label>
           <input
             type="text"
             id="zipcode"
@@ -113,34 +125,47 @@ export const ZipInfo = () => {
             pattern="[0-9]{5}"
             maxLength={5}
             placeholder="Zipcode..."
+            className="zip-code-input"
           />
         </section>
         {error && <span>{error.message}</span>}
-        <input type="submit" value="Submit" />
+        <input className="submit" type="submit" value="Submit" />
       </form>
-      {data?.zipcodeinfo && (
-        <section>
-          <h2>Your Most Recent Zip Code Info:</h2>
-          <div>City: {data.zipcodeinfo.city}</div>
-          <div>State: {data.zipcodeinfo.state}</div>
-        </section>
-      )}
-      <button type="button" onClick={clearSearchHistory}>
-        Clear Search History
-      </button>
       {lastFiveSearches.length > 0 && (
-        <ol>
-          {lastFiveSearches.map((search) => {
-            return (
-              <li key={`search-${uuidv4()}`}>
-                <div>{search.state}</div>
-                <div>{search.city}</div>
-                <div>{search.zipcode}</div>
-              </li>
-            );
-          })}
-        </ol>
+        <button
+          className="clear-search-history"
+          type="button"
+          onClick={clearSearchHistory}
+        >
+          Clear Search History
+        </button>
       )}
+      <table>
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>City</th>
+            <th>Zipcode</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lastFiveSearches.length > 0 ? (
+            lastFiveSearches.map((search) => (
+              <Fragment key={`search-${uuidv4()}`}>
+                <tr>
+                  <td>{search.state}</td>
+                  <td>{search.city}</td>
+                  <td>{search.zipcode}</td>
+                </tr>
+              </Fragment>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3}>No search history recorded.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

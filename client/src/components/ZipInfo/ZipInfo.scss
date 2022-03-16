@@ -1,0 +1,82 @@
+$input-height: 2.5rem;
+
+.zip-info-wrapper {
+  // form {
+  //   display: flex;
+  //   flex-direction: column;
+  //   max-width: 40vw;
+
+  //   div {
+  //     margin-bottom: 2.5rem;
+
+  //     & > * {
+  //       width: 100%;
+  //     }
+  //   }
+
+  //   label {
+  //     display: block;
+  //     margin-bottom: 1rem;
+  //   }
+
+  //   input[type="submit"] {
+  //     width: 20rem;
+  //     height: 5rem;
+  //     border-radius: 1rem;
+  //     border: none;
+  //     color: white;
+  //     font-weight: 500;
+  //     font-size: 1.6rem;
+  //     background-color: #2674f0;
+
+  //     &:hover {
+  //       cursor: pointer;
+  //       background-color: #1b55b3;
+  //     }
+  //   }
+  // }
+
+  table {
+    th,
+    td {
+      text-align: left;
+    }
+    th {
+      padding: 0.5rem 2rem;
+    }
+    td {
+      padding: 2rem;
+    }
+  }
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.select {
+  height: $input-height;
+}
+
+.zip-code-input {
+  height: $input-height;
+}
+
+.submit,
+.clear-search-history {
+  border: none;
+  border-radius: 2rem;
+  background-color: #ff5233;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+
+  &:hover {
+    background-color: #c1442d;
+  }
+}
